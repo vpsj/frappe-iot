@@ -1,0 +1,53 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .bundle {
+        position: absolute;
+        width: 400px;
+        height: 400px;
+        min-height: 350px;
+        text-align: center;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        line-height: 35px;
+        border: 1px solid black;
+        }       
+        
+    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script type="text/javascript">
+frappe.ready(() {
+    var password = frappe.prompt("Enter the password");
+        if (password=={{password}}) {
+            location = "bundler.html"
+          
+        }
+        else 
+        {
+          document.getElementById("msg").value = "test";  
+          //location = "error.html"
+        }
+});
+
+</script>
+<title> Link Bundles </title>
+<body>
+<button class="submit-btn btn btn-primary btn-sm ml-2"  onclick="location.href = 'http://localhost:8000/create-bundle/new';" style="margin-bottom:50px; font-size:20px;">Create New Bundle </button>
+<div class="bundle">
+    <h2>{{title}}</h2>
+    <p>{{description}}</p>    	
+		{% for row in doc.url%}
+		<p><a href={{row.url}}>{{row.note}}</a></p>
+		{%endfor%}
+</div>
+</body>
+</head> 
+</html>
+{% endblock %}
+
+<!-- this is a sample default web page template -->
